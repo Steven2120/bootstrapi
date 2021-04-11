@@ -25,33 +25,38 @@ randomButton.addEventListener("click", () => {
 //Weather app
 
 //queried weather submit button and text input
-const weatherButton = document.querySelector("#weather-button");
 const weatherInput = document.querySelector("#weather-input");
-const weatherOutputTemperature = document.querySelector(
+const weatherButton = document.querySelector("#weather-button");
+
+//queried three different elements where weather results will be displayed
+const displayTemperature = document.querySelector(
   "#weather-display-temperature"
 );
-const weatherOutputWind = document.querySelector("#weather-display-wind");
-const weatherOutputDescription = document.querySelector(
+const displayWind = document.querySelector("#weather-display-wind");
+const displayDescription = document.querySelector(
   "#weather-display-description"
 );
 
+//add event listener to button
 weatherButton.addEventListener("click", () => {
-  console.log("Button pressed!");
+  console.log("button pressed!");
 
+  //queried URL
   const URL = `https://goweather.herokuapp.com/weather/${weatherInput.value}`;
+
   fetch(URL)
     .then((rawRes) => {
-      console.log("Response Success");
+      console.log("Raw response success!");
       console.log("Response", rawRes);
       return rawRes.json();
     })
     .then((json) => {
-      console.log("Json object received");
+      console.log("conversion complete");
       console.log("Json", json);
 
-      weatherOutputTemperature.innerHTML = json.temperature;
-      weatherOutputWind.innerHTML = json.wind;
-      weatherOutputDescription.innerHTML = json.description;
+      displayTemperature.innerHTML = json.temperature;
+      displayWind.innerHTML = json.wind;
+      displayDescription.innerHTML = json.description;
     })
     .catch((error) => console.log(error));
 });
